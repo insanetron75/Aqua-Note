@@ -2,9 +2,10 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class GenusController
+class GenusController extends Controller
 {
     /**
      * @Route("/genus/{genusName}")
@@ -14,6 +15,16 @@ class GenusController
      */
     public function showAction(string $genusName)
     {
-        return new Response("The Genus $genusName");
+        $notes = [
+            'Octopus asked me a riddle',
+            'line 2',
+            'line 3'
+        ];
+        return $this->render('genus/show.html.twig',
+            [
+                'name' => $genusName,
+                'notes' => $notes
+            ]
+        );
     }
 }
