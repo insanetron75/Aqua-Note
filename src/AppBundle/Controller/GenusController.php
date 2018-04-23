@@ -11,6 +11,18 @@ use Symfony\Component\HttpFoundation\Response;
 class GenusController extends Controller
 {
     /**
+     * @Route("/genus")
+     */
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $genuses = $em->getRepository('AppBundle:Genus')
+            ->findAll();
+        dump($genuses);
+        exit;
+    }
+
+    /**
      * @Route("/genus/new", name="")
      */
     public function newAction()
