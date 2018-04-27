@@ -64,6 +64,9 @@ class GenusController extends Controller
         $em    = $this->getDoctrine()->getManager();
         $genus = $em->getRepository("AppBundle:Genus")
                     ->findOneBy(['name' => $genusName]);
+
+        $transformer = $this->get('app.markdown_transformer');
+        $funFact = $transformer->parse($genus->getFunFact());
         /*
         $cache = $this->get('doctrine_cache.providers.my_markdown_cache');
         $key = md5($funFact);
@@ -87,6 +90,7 @@ class GenusController extends Controller
 
         return $this->render('genus/show.html.twig', [
             'genus' => $genus,
+            'funFact' => $funFact,
             'recentNoteCount' => count($recentNotes)
         ]);
     }
